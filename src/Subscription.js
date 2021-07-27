@@ -177,10 +177,10 @@ function Subscription(props){
                 </div>
             { subs.map((data, index) => {
                 return (
-                        <div className={"flex flex-row m-10 mt-5 mb-0 transition duration-250 cursor-pointer rounded-lg ease-in-out p-5 " + " bg-" + colors[index % colors.length].toString() + "-200" + " hover:bg-" + colors[index % colors.length].toString() + "-400" + " cursor-pointer"} >
+                        <div className={"flex flex-row m-10 mt-5 mb-0 transition duration-250 cursor-pointer rounded-lg ease-in-out p-5 " + " bg-" + colors[index % colors.length].toString() + "-200"} >
                             <div className="text-black mt-2 w-32">{data['Name']}</div>
                             <button className="m-auto mr-5 w-20 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-blue-500 hover:bg-blue-700 hover:text-white focus:outline-none transform hover:scale-100 p-2" onClick={() => {subData(data['Name'], data['Price'], data['Tenure'], data['Date'], data['id'])}}>Edit</button>
-                            <button className="m-auto mr-16 ml-10 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-red-500 hover:bg-red-700 hover:text-white focus:outline-none transform hover:scale-100 p-2" onClick={(e) => deleteSub(e, data['id'])}>Delete</button>
+                            <button className="m-auto mr-16 ml-10 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-red-500 hover:bg-red-700 hover:text-white focus:outline-none transform hsover:scale-100 p-2" onClick={(e) => deleteSub(e, data['id'])}>Delete</button>
                             <div className="text-black mr-16 w-12">{((data['Price']/data['Tenure'])*selectedTenure).toFixed(2).toString()}</div>
                         </div>
                 )
