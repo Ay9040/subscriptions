@@ -78,12 +78,12 @@ function Login(props){
                     </>
                 ) : null}
             <div className="flex flex-col">
-                <div className="text-4xl m-10">Login/Sign up</div>
+                <div className="text-4xl text-white m-10">Login/Sign up</div>
                 <form>
                     <div className="flex flex-row">
                         <div className = "flex flex-col">
-                            <label className = "m-2 ml-0 text-lg">Username</label>
-                            <label className = "m-2 ml-0 text-lg mt-7">Password</label>
+                            <label className = "m-2 text-white ml-0 text-lg">Username</label>
+                            <label className = "m-2 text-white ml-0 text-lg mt-7">Password</label>
                         </div>
                         <div className="flex flex-col">
                             <input className="p-2 border-grey-200 border-2 rounded-md focus:outline-none w-96" type="text" ></input>

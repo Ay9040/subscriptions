@@ -113,7 +113,7 @@ function Subscription(props){
     }
 
     return (
-        <div className="flex flex-col bg-gray-900 pb-10 min-h-screen">
+        <div className="flex flex-col pb-10">
             <div className="w-full">
                 <button className="flex flex-row m-auto mr-10 rounded-lg mt-5 mb-0 transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-blue-500 hover:bg-blue-700 hover:text-white focus:outline-none transform hover:scale-100 p-4" onClick={() => setShowModal(true)}>Add Subscriptions</button>
                 {showModal ? (
