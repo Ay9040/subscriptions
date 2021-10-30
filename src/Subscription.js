@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import React from "react"
 import axios from 'axios'
 import "./index.css"
 function Subscription(props){
@@ -45,22 +46,32 @@ function Subscription(props){
     }
 
     async function addSubscription(e){
+        var tenure = 0
         e.preventDefault()
         const Name = e.target.form[0].value
         const Price = e.target.form[1].value
         const Tenure = e.target.form[2].value
         const pDate = e.target.form[3].value
+        if(Tenure == "Weekly"){
+            tenure = 7
+        }
+        else if(Tenure == "Monthly"){
+            tenure = 30
+        }
+        else{
+            tenure = 365
+        }
         console.log({
             Name: Name,
             Price: Price,
-            Tenure: Tenure,
+            Tenure: tenure,
             Date: pDate,
             username: props.username['username']
         })
         await axios.post("https://subscription-back.herokuapp.com/api/subs/", {
             Name: Name,
             Price: Price,
-            Tenure: Tenure,
+            Tenure: tenure,
             Date: pDate,
             username: props.username['username']
         }).then(res => {
@@ -72,22 +83,32 @@ function Subscription(props){
     }
 
     async function updateSubscription(e){
+        var tenure = 0
         e.preventDefault()
         const Name = e.target.form[0].value
         const Price = e.target.form[1].value
         const Tenure = e.target.form[2].value
         const pDate = e.target.form[3].value
+        if(Tenure == "Weekly"){
+            tenure = 7
+        }
+        else if(Tenure == "Monthly"){
+            tenure = 30
+        }
+        else{
+            tenure = 365
+        }
         console.log({
             Name: Name,
             Price: Price,
-            Tenure: Tenure,
+            Tenure: tenure,
             Date: pDate,
             username: props.username['username']
         })
         await axios.put("https://subscription-back.herokuapp.com/api/subs/" + subID.toString(), {
             Name: Name,
             Price: Price,
-            Tenure: Tenure,
+            Tenure: tenure,
             Date: pDate,
             username: props.username['username']
         }).then(res => {
@@ -143,7 +164,11 @@ function Subscription(props){
                                     <div className="flex flex-col">
                                         <input className="p-2 border-grey-200 border-2 rounded-md focus:outline-none w-96" type="text" defaultValue={Name}></input>
                                         <input className="p-2 border-grey-200 border-2 rounded-md focus:outline-none mt-5 w-96" type="number" defaultValue={Price}></input>
-                                        <input className="p-2 border-grey-200 border-2 rounded-md focus:outline-none mt-5 w-96" type="number" defaultValue={Tenure}></input>
+                                        <select className="mt-5 w-96 focus:outline-none border-2 rounded-md p-2 border-grey-200" onChange={changeTenure} name="tenure" id="tenure" defaultValue={Tenure}>
+                                            <option value="Weekly">Weekly</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Annually">Annually</option>
+                                        </select>
                                         <input className="p-2 border-grey-200 border-2 rounded-md focus:outline-none mt-5 w-96" type="date" defaultValue={sDate}></input>
                                     </div>
                                 </div>
@@ -176,10 +201,20 @@ function Subscription(props){
                     <div className="text-black text-2xl m-auto mr-10 font-bold">{total.toFixed(2)}</div>
                 </div>
             { subs.map((data, index) => {
+                var tenure = "Weekly";
+                if(data["Tenure"] == 7){
+                    tenure = "Weekly"
+                }
+                else if(data["Tenure"] == 30){
+                    tenure = "Monthly"
+                }
+                else{
+                    tenure = "Annually"
+                }
                 return (
                         <div className={"flex flex-row m-10 mt-5 mb-0 transition duration-250 cursor-pointer rounded-lg ease-in-out p-5 " + " bg-" + colors[index % colors.length].toString() + "-200"} >
                             <div className="text-black mt-2 w-32">{data['Name']}</div>
-                            <button className="m-auto mr-5 w-20 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-blue-500 hover:bg-blue-700 hover:text-white focus:outline-none transform hover:scale-100 p-2" onClick={() => {subData(data['Name'], data['Price'], data['Tenure'], data['Date'], data['id'])}}>Edit</button>
+                            <button className="m-auto mr-5 w-20 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-blue-500 hover:bg-blue-700 hover:text-white focus:outline-none transform hover:scale-100 p-2" onClick={() => {subData(data['Name'], data['Price'], tenure, data['Date'], data['id'])}}>Edit</button>
                             <button className="m-auto mr-16 ml-10 rounded-lg transition duration-500 cursor-pointer rounded-lg ease-in-out text-white bg-red-500 hover:bg-red-700 hover:text-white focus:outline-none transform hsover:scale-100 p-2" onClick={(e) => deleteSub(e, data['id'])}>Delete</button>
                             <div className="text-black mr-16 w-12">{((data['Price']/data['Tenure'])*selectedTenure).toFixed(2).toString()}</div>
                         </div>

@@ -1,5 +1,5 @@
 import macbook from "./macbook.svg"
-
+import React from "react"
 function Home(){
 
 

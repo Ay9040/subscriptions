@@ -3,6 +3,7 @@ import Login from "./Login"
 import Subscription from "./Subscription"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import background from "./header.png";
 import Home from './Home'
